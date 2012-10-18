@@ -1,19 +1,14 @@
 this is an benchmark for tcp forward server application
-python + twisted
-pypy   + twisted
-python + gevent
-go lang
+====================================
 
-benchmark result:   
+* python + twisted
+* pypy   + twisted
+* python + gevent
+* go lang
 
-	           produceSocket consumerSocket     network peak       program cpu used     
-
-python + twisted:        250             250               16M              75%    
-
-pypy   + twisted:        320             320               20M              50%    
-
-python + gevent :        260             260               13M              60%    
-
-go lang         :        400             400               24M              49%   
-
-
+| solution | max forward socket | peak stable network data |
+| ------------ | ------------- | ------------ |
+| python26+twisted | 250  | 16M |
+| pypy27+twisted | 320  | 20M |
+| python26+gevent | 260  | 13M |
+| go lang | 400  | 24M |
