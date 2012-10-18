@@ -10,14 +10,14 @@ import (
 //read data from socket which is created by parent, and push the read out data input chan to let parent know
 //if no data is read out after time out, push signal to quit chan to let parent know
 type MyChan struct {
-	Mychan chan string
+	Mychan chan []byte
 }
 
 var glo_Consumer map[string]MyChan
 
 func consumerClient(connection net.Conn, timeout time.Duration) {
 	b := make([]byte, 20)
-	mychan := make(chan string)
+	mychan := make(chan []byte)
 	n, err := connection.Read(b)
 
 	if n > 0 {
@@ -31,7 +31,7 @@ func consumerClient(connection net.Conn, timeout time.Duration) {
 	}
 	for {
 		msg := <-mychan
-		n, err := connection.Write([]byte(msg))
+		n, err := connection.Write(msg)
 		if n > 0 {
 			continue
 		}
@@ -54,13 +54,13 @@ func producerClient(connection net.Conn, timeout time.Duration, consumer_chan ma
 		fmt.Println(err)
 		return
 	}
-	chunk := make([]byte, 1024)
+	chunk := make([]byte, 65535)
 	for {
 		n, err := connection.Read(chunk)
 		if n > 0 {
 			v, ok := consumer_chan[myid]
 			if ok {
-				v.Mychan <- string(chunk)
+				v.Mychan <- chunk[0:n]
 			}
 			continue
 		}
