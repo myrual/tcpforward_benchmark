@@ -12,7 +12,7 @@ python + twisted:        250             250               16M              75%
 
 pypy   + twisted:        320             320               20M              50%    
 
-python + gevent :        150             150               10M              72%    
+python + gevent :        260             260               13M              60%    
 
 go lang         :        200             200               12M              49%   
 
