@@ -10,5 +10,5 @@ this is an benchmark for tcp forward server application
 | ------------ | ------------- | ------------ |
 | python26+twisted | 250  | 16M |
 | pypy27+twisted | 320  | 20M |
-| python26+gevent | 260  | 13M |
+| python26+gevent | 400  | 22M |
 | go lang | 400  | 24M |
